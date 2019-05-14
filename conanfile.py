@@ -38,13 +38,13 @@ class LibwebsocketsConan(ConanFile):
 
     def requirements(self):
         if self.options.lws_with_libuv:
-            self.requires.add("libuv/1.15.0@bincrafters/stable")
+            self.requires.add("libuv/1.27.0@zinnion/stable")
         if self.options.lws_with_libevent:
             self.requires.add("libevent/2.1.8@bincrafters/stable")
         if self.options.lws_with_zlib:
-            self.requires.add("zlib/>=1.2.11@conan/stable")
+            self.requires.add("zlib/1.2.11@zinnion/stable")
         if self.options.lws_with_ssl:
-            self.requires.add("OpenSSL/>=1.0.2r@conan/stable")
+            self.requires.add("OpenSSL/1.1.1b@zinnion/stable")
 
     def source(self):
         tools.get("{0}/archive/v{1}.tar.gz".format(self.homepage, self.version))
