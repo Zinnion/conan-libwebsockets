@@ -25,9 +25,9 @@ class LibwebsocketsConan(ConanFile):
     default_options = {
         'shared': True,
         'lws_with_libuv': False,
-        'lws_with_libevent': False,
-        'lws_with_zlib': False,
-        'lws_with_ssl': False
+        'lws_with_libevent': True,
+        'lws_with_zlib': True,
+        'lws_with_ssl': True
     }
 
     _source_subfolder = "source_subfolder"
@@ -40,7 +40,7 @@ class LibwebsocketsConan(ConanFile):
         if self.options.lws_with_libuv:
             self.requires.add("libuv/1.27.0@zinnion/stable")
         if self.options.lws_with_libevent:
-            self.requires.add("libevent/2.1.8@bincrafters/stable")
+            self.requires.add("libevent/2.1.8@zinnion/stable")
         if self.options.lws_with_zlib:
             self.requires.add("zlib/1.2.11@zinnion/stable")
         if self.options.lws_with_ssl:
