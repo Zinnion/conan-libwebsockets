@@ -23,7 +23,7 @@ class LibwebsocketsConan(ConanFile):
         "lws_with_ssl": [True, False]
     }
     default_options = {
-        'shared': True,
+        'shared': False,
         'lws_with_libuv': False,
         'lws_with_libevent': True,
         'lws_with_zlib': True,
@@ -72,10 +72,14 @@ class LibwebsocketsConan(ConanFile):
         cmake.install()
 
     def package(self):
-        self.copy("*.so*", dst="lib/debug", keep_path=False)
-        self.copy("*.so*", dst="lib/release", keep_path=False)
+       self.copy("*.h", dst="include", src=("%s/include" % self._source_subfolder))
+       self.copy("*.so*", dst="lib/debug", keep_path=False)
+       self.copy("*.so*", dst="lib/release", keep_path=False)
+       self.copy("*.dylib*", dst="lib/debug", keep_path=False)
+       self.copy("*.dylib*", dst="lib/release", keep_path=False)
 
     def package_info(self):
         self.cpp_info.libs = tools.collect_libs(self)
         self.cpp_info.debug.libdirs = ["lib/debug"]
         self.cpp_info.release.libdirs = ["lib/release"]        
+        self.cpp_info.release.libdirs = ["lib"]        
