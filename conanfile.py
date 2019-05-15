@@ -79,4 +79,3 @@ class LibwebsocketsConan(ConanFile):
         self.cpp_info.libs = tools.collect_libs(self)
         self.cpp_info.debug.libdirs = ["lib/debug"]
         self.cpp_info.release.libdirs = ["lib/release"]        
-        #self.cpp_info.libdirs = ['lib', 'lib/release', 'lib/debug']	 # Directories where libraries can be found
