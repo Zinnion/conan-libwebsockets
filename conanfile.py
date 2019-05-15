@@ -44,7 +44,7 @@ class LibwebsocketsConan(ConanFile):
         if self.options.lws_with_zlib:
             self.requires.add("zlib/1.2.11@zinnion/stable")
         if self.options.lws_with_ssl:
-            self.requires.add("OpenSSL/1.1.1b@zinnion/stable")
+            self.requires.add("OpenSSL/1.0.2r@conan/stable")
 
     def source(self):
         tools.get("{0}/archive/v{1}.tar.gz".format(self.homepage, self.version))
@@ -72,7 +72,11 @@ class LibwebsocketsConan(ConanFile):
         cmake.install()
 
     def package(self):
-        self.copy(pattern="LICENSE", dst="license", src=self._source_subfolder)
+        self.copy("*.so*", dst="lib/debug", keep_path=False)
+        self.copy("*.so*", dst="lib/release", keep_path=False)
 
     def package_info(self):
         self.cpp_info.libs = tools.collect_libs(self)
+        self.cpp_info.debug.libdirs = ["lib/debug"]
+        self.cpp_info.release.libdirs = ["lib/release"]        
+        #self.cpp_info.libdirs = ['lib', 'lib/release', 'lib/debug']	 # Directories where libraries can be found
