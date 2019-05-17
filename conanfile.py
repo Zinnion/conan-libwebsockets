@@ -20,14 +20,18 @@ class LibwebsocketsConan(ConanFile):
         "lws_with_libuv": [True, False],
         "lws_with_libevent": [True, False],
         "lws_with_zlib": [True, False],
-        "lws_with_ssl": [True, False]
+        "lws_with_ssl": [True, False],
+        "lws_wit_raw": [True, False],
+        "lws_with_plugins": [True, False]
     }
     default_options = {
         'shared': False,
-        'lws_with_libuv': False,
+        'lws_with_libuv': True,
         'lws_with_libevent': True,
         'lws_with_zlib': True,
-        'lws_with_ssl': True
+        'lws_with_ssl': True,
+        'lws_wit_raw': True,
+        'lws_with_plugins': False,
     }
 
     _source_subfolder = "source_subfolder"
@@ -38,9 +42,9 @@ class LibwebsocketsConan(ConanFile):
 
     def requirements(self):
         if self.options.lws_with_libuv:
-            self.requires.add("libuv/1.27.0@zinnion/stable")
+            self.requires.add("libuv/1.29.0@zinnion/stable")
         if self.options.lws_with_libevent:
-            self.requires.add("libevent/2.1.8@zinnion/stable")
+            self.requires.add("libevent/2.1.9@zinnion/stable")
         if self.options.lws_with_zlib:
             self.requires.add("zlib/1.2.11@zinnion/stable")
         if self.options.lws_with_ssl:
@@ -61,6 +65,8 @@ class LibwebsocketsConan(ConanFile):
         cmake.definitions["LWS_WITH_LIBUV"] = self.options.lws_with_libuv
         cmake.definitions["LWS_WITH_LIBEVENT"] = self.options.lws_with_libevent
         cmake.definitions["LWS_WITH_ZLIB"] = self.options.lws_with_zlib
+        cmake.definitions["LWS_ROLE_RAW_PROXY"] = self.options.lws_wit_raw
+        cmake.definitions["LWS_WITH_PLUGINS"] = self.options.lws_with_plugins
         if not self.options.lws_with_zlib:
             cmake.definitions["LWS_WITHOUT_EXTENSIONS"] = True
             cmake.definitions["LWS_WITH_ZIP_FOPS"] = False
