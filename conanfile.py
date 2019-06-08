@@ -42,7 +42,7 @@ class LibwebsocketsConan(ConanFile):
 
     def requirements(self):
         if self.options.lws_with_libuv:
-            self.requires.add("libuv/1.29.0@zinnion/stable")
+            self.requires.add("libuv/1.29.1@zinnion/stable")
         if self.options.lws_with_libevent:
             self.requires.add("libevent/2.1.9@zinnion/stable")
         if self.options.lws_with_zlib:
