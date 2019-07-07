@@ -6,11 +6,10 @@ from conans import ConanFile, CMake, tools
 
 class LibwebsocketsConan(ConanFile):
     name = "libwebsockets"
-    version = "3.1.1"
+    version = "3.1.0"
     description = "Canonical libwebsockets.org websocket library"
     url = "https://github.com/zinnion/conan-libwebsockets"
-    #homepage = "https://github.com/warmcat/libwebsockets"
-    homepage = "https://github.com/maurodelazeri/libwebsockets"
+    homepage = "https://github.com/warmcat/libwebsockets"
     license = "LGPL-2.1"
     exports = "LICENSE.md"
     exports_sources = "CMakeLists.txt"
