@@ -65,21 +65,6 @@ class LibwebsocketsConan(ConanFile):
 
     def _configure_cmake(self):
         cmake = CMake(self)
-        cmake.definitions["LWS_WITHOUT_TESTAPPS"] = True
-        cmake.definitions["LWS_LINK_TESTAPPS_DYNAMIC"] = True
-        cmake.definitions["LWS_WITH_SHARED"] = self.options.shared
-        cmake.definitions["LWS_WITH_STATIC"] = not self.options.shared
-        cmake.definitions["LWS_WITH_SSL"] = self.options.lws_with_ssl
-        cmake.definitions["LWS_WITH_LIBUV"] = self.options.lws_with_libuv
-        cmake.definitions["LWS_WITH_LIBEVENT"] = self.options.lws_with_libevent
-        cmake.definitions["LWS_WITH_ZLIB"] = self.options.lws_with_zlib
-        if not self.options.lws_with_zlib:
-            cmake.definitions["LWS_WITHOUT_EXTENSIONS"] = True
-            cmake.definitions["LWS_WITH_ZIP_FOPS"] = False
-            
-        if not self.options.shared and self.settings.os != "Windows":
-            cmake.definitions["LWS_STATIC_PIC"] = self.options.fPIC
-
         cmake.configure(build_folder=self._build_subfolder)
         return cmake
 
